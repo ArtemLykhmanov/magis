@@ -7,7 +7,7 @@ from typing import Dict, Any
 import numpy as np
 import uvicorn
 from pathlib import Path
-import pandas as pd  # <-- додано
+import pandas as pd  
 import os
 THRESHOLD = float(os.getenv("IDS_THRESHOLD", "0.5"))
 MODEL_PATH = Path("artifacts/model.joblib")
@@ -37,7 +37,7 @@ def predict(payload: FlowFeatures):
         row = payload.values or {}
         xdict: Dict[str, Any] = {}
 
-        # підготуємо значення з правильними типами під КОЖНУ фічу
+        # підготуємо значення з правильними типами під кожну фічу
         for f in FEATURES:
             if f in NUM_COLS:
                 val = row.get(f, 0)
@@ -61,7 +61,7 @@ def predict(payload: FlowFeatures):
         return {"prediction": pred, "probability": float(proba), "model": meta.get("best_model", "?"), "threshold": THRESHOLD}
 
     except Exception as e:
-        # Повертаємо зрозуміле 400 з деталями, щоб легше дебажити
+        # Повертаємо зрозуміле 400 з деталями
         raise HTTPException(status_code=400, detail=f"Inference error: {e}")
 
 if __name__ == "__main__":
