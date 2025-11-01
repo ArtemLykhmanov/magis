@@ -48,8 +48,7 @@ if demo_pred.exists():
 # 3) Latency гістограма (зі stream_alerts.csv)
 stream_log = ART / "stream_alerts.csv"
 if stream_log.exists():
-    # в stream_alerts.csv немає latency → візьмемо з консолі наступного разу
-    # альтернатива: швидко підкинемо з demo_batch/stream_v3, якщо ти збережеш туди latency
+
     pass
 
 print("Saved: artifacts/confusion_matrix.png, pr_curve.png (за наявності demo_predictions.csv)")
